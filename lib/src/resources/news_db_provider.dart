@@ -23,7 +23,7 @@ class NewsDbProvider implements Source, Cache {
         onCreate: (Database newDb, int version) {
       newDb.execute("""
         CREATE TABLE Items (
-          id INTEGER PRIMARY KEY;
+          id INTEGER PRIMARY KEY,
           type TEXT,
           by TEXT,
           time INTEGER,
@@ -57,7 +57,15 @@ class NewsDbProvider implements Source, Cache {
   }
 
   Future<int> addItem(Item item) {
-    return db.insert('Items', item.toMap());
+    return db.insert(
+      'Items',
+      item.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
+  }
+
+  Future<int> clear() {
+    return db.delete("Items");
   }
 }
 

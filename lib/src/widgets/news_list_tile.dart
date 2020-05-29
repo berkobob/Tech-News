@@ -37,8 +37,8 @@ class NewsListTile extends StatelessWidget {
             Icon(Icons.comment),
             Text('${item.descendants}')
           ],),
-          onTap: () => Navigator.pushNamed(context, '/${item.id}'),
-          // onTap: () => _launchURL(item.url),
+          onLongPress: () => Navigator.pushNamed(context, '/${item.id}'),
+          onTap: () => _launchURL(item.url),
         ),
         Divider(height: 8),
       ],
